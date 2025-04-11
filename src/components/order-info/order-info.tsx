@@ -1,7 +1,7 @@
 import { FC, useEffect, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
-import { TIngredient, TOrder } from '@utils-types';
+import { TIngredient } from '@utils-types';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from '@store';
 import { fetchOrder, fetchOrders } from '@slices/ordersSlice';
@@ -17,7 +17,6 @@ export const OrderInfo: FC = () => {
   }, [dispatch]);
 
   const orderData = useSelector((state) => state.orders.orderModalData);
-
   const ingredients: TIngredient[] = useSelector(getIngredients);
 
   /* Готовим данные для отображения */
