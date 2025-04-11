@@ -19,7 +19,13 @@ import {
   OrderInfo,
   ProtectedRoute
 } from '@components';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Route,
+  Routes,
+  useLocation,
+  useMatch,
+  useNavigate
+} from 'react-router-dom';
 
 import { FC, useEffect } from 'react';
 import { useDispatch } from '@store';
@@ -32,6 +38,10 @@ const App: FC = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const background = location.state?.background;
+
+  const profileMatch = useMatch('/profile/orders/:number')?.params.number;
+  const feedMatch = useMatch('/feed/:number')?.params.number;
+  const orderNumber = profileMatch || feedMatch;
 
   useEffect(() => {
     dispatch(fetchIngredients());
@@ -50,6 +60,18 @@ const App: FC = () => {
         <Route path='*' element={<NotFound404 />} />
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
+        <Route
+          path='/feed/:number'
+          element={
+            <div className={styles.detailPageWrap}>
+              <p className={`${styles.detailHeader} text_type_main-large`}>
+                #{orderNumber?.padStart(6, '0')}
+              </p>
+              <OrderInfo />
+            </div>
+          }
+        />
+        <Route path='/ingredients/:id' element={<IngredientDetails />} />
         <Route
           path='/login'
           element={
@@ -98,6 +120,19 @@ const App: FC = () => {
             </ProtectedRoute>
           }
         />
+        <Route
+          path='/profile/orders/:number'
+          element={
+            <ProtectedRoute>
+              <div className={styles.detailPageWrap}>
+                <p className={`${styles.detailHeader} text_type_main-large`}>
+                  #{orderNumber?.padStart(6, '0')}
+                </p>
+                <OrderInfo />
+              </div>
+            </ProtectedRoute>
+          }
+        />
       </Routes>
 
       {background && (
@@ -105,7 +140,10 @@ const App: FC = () => {
           <Route
             path='/feed/:number'
             element={
-              <Modal title='Детали заказа' onClose={closeModal}>
+              <Modal
+                title={`#${orderNumber?.padStart(6, '0')}`}
+                onClose={closeModal}
+              >
                 <OrderInfo />
               </Modal>
             }
@@ -122,7 +160,10 @@ const App: FC = () => {
             path='/profile/orders/:number'
             element={
               <ProtectedRoute>
-                <Modal title='Детали заказа' onClose={closeModal}>
+                <Modal
+                  title={`#${orderNumber?.padStart(6, '0')}`}
+                  onClose={closeModal}
+                >
                   <OrderInfo />
                 </Modal>
               </ProtectedRoute>
