@@ -3,8 +3,6 @@ import reducer, {
   initialState
 } from '../src/services/slices/feedsSlice';
 
-// import reducer from '../src/services/slices/feeds';
-
 const feedsMockData = {
   success: true,
   orders: [],

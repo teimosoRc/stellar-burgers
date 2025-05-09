@@ -7,8 +7,6 @@ import reducer, {
   initialState
 } from '../src/services/slices/builderSlice';
 
-// import reducer from '../src/services/slices/builder';
-
 const bunMockData = {
   _id: '643d69a5c3f7b9001cfa093c',
   name: 'Краторная булка N-200i',

@@ -1,4 +1,4 @@
-import {
+import reducer, {
   fetchUser,
   updateUser,
   register,
@@ -6,8 +6,6 @@ import {
   logout,
   initialState
 } from '../src/services/slices/userSlice';
-
-import reducer from '../src/services/slices/userSlice';
 
 const userMockData = {
   email: 'example@example.mail',

@@ -1,12 +1,10 @@
-import {
+import reducer, {
   fetchOrder,
   fetchOrders,
   createOrder,
   clearModalData,
   initialState
 } from '../src/services/slices/ordersSlice';
-
-import reducer from '../src/services/slices/ordersSlice';
 
 const ordersMockData = [
   {
