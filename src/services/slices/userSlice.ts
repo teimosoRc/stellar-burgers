@@ -24,7 +24,7 @@ type TUserState = {
   registerError?: SerializedError;
 };
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   isAuthChecked: false,
   isAuthenticated: false,
   data: {

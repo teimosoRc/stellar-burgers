@@ -11,7 +11,7 @@ import {
 } from 'react-redux';
 import { ordersMiddleware } from '../middleware/orders';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
   orders: ordersReducer,
   builder: builderSlice,
